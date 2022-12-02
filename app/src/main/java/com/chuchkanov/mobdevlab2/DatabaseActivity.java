@@ -38,6 +38,7 @@ public class DatabaseActivity extends AppCompatActivity {
         EditText temp = (EditText) findViewById(R.id.max_population);
         temp.setText("1500000");
         databaseHelper = new DBHelper(getApplicationContext());
+        calc_populatiuon();
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
@@ -54,6 +55,8 @@ public class DatabaseActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.app_menu, menu);
         return true;
     }
+
+
 
 
 
@@ -78,6 +81,22 @@ public class DatabaseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void calc_populatiuon(){
+        TextView tv = (TextView) findViewById(R.id.textView6);
+        db = databaseHelper.getReadableDatabase();
+        userCursor =  db.rawQuery("select * from "+ DBHelper.TABLE +";",null);
+        int calc = 0;
+        int ind = 0;
+        while(userCursor.moveToNext()){
+            calc+=userCursor.getInt(2);
+            ind++;
+        }
+        tv.setText("Середнє населення - "+Double.toString(calc/ind)+"; Oбластей - "+Integer.toString(ind));
+
+    }
+
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -142,6 +161,7 @@ public class DatabaseActivity extends AppCompatActivity {
         db = databaseHelper.getReadableDatabase();
         String str = "INSERT OR IGNORE INTO districts ("+DBHelper.COLUMN_NAME+","+DBHelper.COLUMN_POPULATION+", "+DBHelper.COLUMN_AREA+","+DBHelper.COLUMN_CAPITAL+") VALUES (\'"+inpt1+"\',"+inpt2+","+inpt3+",\'"+inpt4+"\');";
         db.execSQL(str);
+        calc_populatiuon();
 
 
 
