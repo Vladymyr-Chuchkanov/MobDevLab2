@@ -39,6 +39,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/PhoneBook_str" />
+
+
+
+        <RadioButton
+            android:id="@+id/aphine_rbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/Affine_str" />
+
+        <RadioButton
+            android:id="@+id/cesar_rbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Cesar_str" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

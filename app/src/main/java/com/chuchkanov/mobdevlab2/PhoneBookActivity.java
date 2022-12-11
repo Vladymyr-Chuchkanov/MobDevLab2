@@ -6,10 +6,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -66,7 +69,7 @@ public class PhoneBookActivity extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
-        HashMap<String, String> map= new HashMap<>();
+        HashMap<String, String> map;
         if(cursor!=null){
             while (cursor.moveToNext()) {
 
@@ -79,7 +82,7 @@ public class PhoneBookActivity extends AppCompatActivity {
                 Cursor phones = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + cid, null, null);
                 while (phones.moveToNext()) {
-                    number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace(" ","");
                     int type = phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
                     switch (type) {
                         case ContactsContract.CommonDataKinds.Phone.TYPE_HOME:
@@ -111,7 +114,6 @@ public class PhoneBookActivity extends AppCompatActivity {
             }
             cursor.close();
         }
-        arrayList.add(map);
 
         // создаем адаптер
 
@@ -123,5 +125,38 @@ public class PhoneBookActivity extends AppCompatActivity {
         ListView contactList = findViewById(R.id.contactList);
         // устанавливаем для списка адаптер
         contactList.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.app_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case R.id.menu_item_main:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                return true;
+            case R.id.menu_item_author:
+                Intent intent2 = new Intent(this, AuthorActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent2);
+                return true;
+            case R.id.menu_item_help:
+                Intent intent1 = new Intent(this, HelpActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent1);
+                return true;
+
+        }
+        //headerView.setText(item.getTitle());
+        return super.onOptionsItemSelected(item);
     }
 }

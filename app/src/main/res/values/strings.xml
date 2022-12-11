@@ -4,4 +4,6 @@
     <string name="PhoneBook_str">Телефонна книга</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="author_info_str">Чучканов Володимир ТТП-42 v.chuchkanov@knu.ua</string>
+    <string name="Affine_str">Афінний шифр</string>
+    <string name="Cesar_str">Шифр Цезаря</string>
 </resources>

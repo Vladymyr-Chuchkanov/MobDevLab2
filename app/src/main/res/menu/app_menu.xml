@@ -8,5 +8,10 @@
         android:id="@+id/menu_item_author"
         android:orderInCategory="2"
         android:title="Про автора" />
+    <item
+        android:id="@+id/menu_item_help"
+        android:orderInCategory="3"
+        android:title="Інструкція" />
+
 
 </menu>

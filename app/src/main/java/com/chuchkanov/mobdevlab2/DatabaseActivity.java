@@ -77,6 +77,11 @@ public class DatabaseActivity extends AppCompatActivity {
 
                 startActivity(intent2);
                 return true;
+            case R.id.menu_item_help:
+                Intent intent = new Intent(this, HelpActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                return true;
 
         }
         return super.onOptionsItemSelected(item);

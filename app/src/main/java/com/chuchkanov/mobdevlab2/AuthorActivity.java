@@ -34,6 +34,12 @@ public class AuthorActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_item_author:
                 return true;
+            case R.id.menu_item_help:
+                Intent intent1 = new Intent(this, HelpActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent1);
+                return true;
+
         }
         //headerView.setText(item.getTitle());
         return super.onOptionsItemSelected(item);

@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
+            case R.id.menu_item_help:
+                Intent intent1 = new Intent(this, HelpActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent1);
+                return true;
 
         }
         return super.onOptionsItemSelected(item);
@@ -52,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent2 = new Intent(this, PhoneBookActivity.class);
             intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent2);
+        }
+        else if(selected==R.id.aphine_rbtn){
+            Intent intent = new Intent(this, AffineActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        }else if(selected==R.id.cesar_rbtn){
+            Intent intent = new Intent(this, CesarActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         }
 
 
